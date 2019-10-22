@@ -30,6 +30,7 @@ class Stopwatch: NSObject, NSCoding {
         didSet {
             if state == .running {
                 timer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(self.counter), userInfo: nil, repeats: true)
+                RunLoop.main.add(timer, forMode: RunLoop.Mode.common)
             } else {
                 startTime = nil
                 lapTime = nil
@@ -125,6 +126,7 @@ class Stopwatch: NSObject, NSCoding {
         startTime = Date()
         lapTime = Date()
         timer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(self.counter), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer, forMode: RunLoop.Mode.common)
         state = .running
     }
     
